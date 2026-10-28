@@ -1,0 +1,5 @@
+/* Techmate admin: light-grey canvas and corporate accents on top of Filament's theme. */
+:root:not(.dark) .fi-body { background-color: #F3F6FA; }
+.fi-topbar, .fi-sidebar-header { border-bottom: 2px solid #D62836; }
+.fi-simple-layout { background-color: #F3F6FA; }
+:root:not(.dark) .fi-simple-main { border-top: 4px solid #174A83; }
