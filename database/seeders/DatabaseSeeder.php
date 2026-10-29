@@ -12,11 +12,15 @@ class DatabaseSeeder extends Seeder
      * Model events stay enabled on purpose: reference/number generation and
      * category/spec validation run in model hooks.
      *
-     * Production seeding is intentionally empty: no catalogue, customer or
-     * company data is invented. Sample data is limited to local/testing.
+     * The real catalogue (categories, authorised brands, first products) is seeded outside
+     * the test suite and is safe to re-run. Invented sample data is limited to local/testing.
      */
     public function run(): void
     {
+        if (! app()->environment('testing')) {
+            $this->call(RealCatalogueSeeder::class);
+        }
+
         if (app()->environment(['local', 'testing'])) {
             $this->call(DevelopmentSampleSeeder::class);
         }

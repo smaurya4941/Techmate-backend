@@ -1,0 +1,662 @@
+[
+  {
+    "slug": "unox-xebc-06eu-eprm",
+    "sku": "XEBC-06EU-EPRM",
+    "name": "UNOX XEBC-06EU-EPRM PLUS Countertop Combi Oven",
+    "category": "bakery-baking",
+    "subCategory": "bakery-combi-ovens",
+    "brand": "unox",
+    "price": 595000,
+    "short": "Electric countertop combi oven with 6 trays (600x400 mm) and touch screen control.",
+    "description": "UNOX XEBC-06EU-EPRM PLUS Countertop Combi Oven. Electric countertop combi oven with 6 trays (600x400 mm) and touch screen control. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "6 trays (600x400 mm)",
+      "Touch screen control",
+      "Temperature range 30-260°C"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "6 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "380 V",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Temperature Range",
+        "value": "30°C to 260°C",
+        "unit": null
+      }
+    ]
+  },
+  {
+    "slug": "unox-xevc-0711-eprm",
+    "sku": "XEVC-0711-EPRM",
+    "name": "UNOX XEVC-0711-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven",
+    "category": "cooking",
+    "subCategory": "cooking-combi-ovens",
+    "brand": "unox",
+    "price": 604000,
+    "short": "Electric combi oven with 7 GN 1/1 trays, USB and Wi-Fi/LAN connectivity.",
+    "description": "UNOX XEVC-0711-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven. Electric combi oven with 7 GN 1/1 trays, USB and Wi-Fi/LAN connectivity. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "7 trays (GN 1/1)",
+      "USB and Wi-Fi/LAN connectivity",
+      "12 kW, 415 V"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "7 x GN 1/1",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "12 kW",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "415 V",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "85",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xefr-04hs-eldp",
+    "sku": "XEFR-04HS-ELDP",
+    "name": "UNOX XEFR-04HS-ELDP BAKERLUX SHOP.Pro LED Convection Oven",
+    "category": "bakery-baking",
+    "subCategory": "convection-ovens",
+    "brand": "unox",
+    "price": 132000,
+    "short": "Tabletop electric convection oven with steam and 4 trays (460x330 mm).",
+    "description": "UNOX XEFR-04HS-ELDP BAKERLUX SHOP.Pro LED Convection Oven. Tabletop electric convection oven with steam and 4 trays (460x330 mm). Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "4 trays (460x330 mm)",
+      "Steam function",
+      "Tabletop installation"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "4 x 460x330 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "3 kW",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "220-240 V",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "39",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xft-193",
+    "sku": "XFT 193",
+    "name": "UNOX XFT 193 L.MISS ROSSELLA Manual Convection Oven with Humidity",
+    "category": "bakery-baking",
+    "subCategory": "convection-ovens",
+    "brand": "unox",
+    "price": 142000,
+    "short": "Manual-control convection oven with humidity and 4 trays (600x400 mm).",
+    "description": "UNOX XFT 193 L.MISS ROSSELLA Manual Convection Oven with Humidity. Manual-control convection oven with humidity and 4 trays (600x400 mm). Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "4 trays (600x400 mm)",
+      "Manual controls with analog display",
+      "Humidity function"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "4 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Load",
+        "value": "6.5 kW",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "49",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xema-01ns-mcdn",
+    "sku": "XEMA-01NS-MCDN",
+    "name": "UNOX XEMA-01NS-MCDN SPEED.Compact Electric Speed Oven",
+    "category": "cooking",
+    "subCategory": null,
+    "brand": "unox",
+    "price": 348000,
+    "short": "Compact speed oven combining microwave and hot air, with a drop-down door.",
+    "description": "UNOX XEMA-01NS-MCDN SPEED.Compact Electric Speed Oven. Compact speed oven combining microwave and hot air, with a drop-down door. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "Microwave and hot-air cooking",
+      "Drop-down door",
+      "60 cm depth"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "1 x 300x300 mm",
+        "unit": "Tray"
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Depth",
+        "value": "60",
+        "unit": "cm"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xevc-0311-eprm",
+    "sku": "XEVC-0311-EPRM",
+    "name": "UNOX XEVC-0311-EPRM CHEFTOP MIND.Maps Countertop Combi Oven GN 1/1",
+    "category": "cooking",
+    "subCategory": "cooking-combi-ovens",
+    "brand": "unox",
+    "price": 370000,
+    "short": "Countertop electric combi oven with 3 GN 1/1 trays and timer.",
+    "description": "UNOX XEVC-0311-EPRM CHEFTOP MIND.Maps Countertop Combi Oven GN 1/1. Countertop electric combi oven with 3 GN 1/1 trays and timer. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "3 trays (GN 1/1)",
+      "Timer control",
+      "5 kW"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "3 x GN 1/1",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "5 kW",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "230 V / 400 V",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "50",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xebc-10eu-eprm",
+    "sku": "XEBC-10EU-EPRM",
+    "name": "UNOX XEBC-10EU-EPRM BAKERTOP MIND.Maps Combi Oven",
+    "category": "bakery-baking",
+    "subCategory": "bakery-combi-ovens",
+    "brand": "unox",
+    "price": 820000,
+    "short": "Electric combi oven with 10 trays (600x400 mm), 21 kW, three-phase supply.",
+    "description": "UNOX XEBC-10EU-EPRM BAKERTOP MIND.Maps Combi Oven. Electric combi oven with 10 trays (600x400 mm), 21 kW, three-phase supply. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "10 trays (600x400 mm)",
+      "21 kW (32 A, 3-phase)",
+      "400 V 3N"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "10 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "21 kW (32 A, 3-phase)",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "400 V 3N",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Dimensions (W×D×H)",
+        "value": "860 × 957 × 1163",
+        "unit": "mm"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xefr-04eu-eldp",
+    "sku": "XEFR-04EU-ELDP",
+    "name": "UNOX XEFR-04EU-ELDP ROSSELLA BAKERLUX SHOP.Pro Convection Oven with Humidity",
+    "category": "bakery-baking",
+    "subCategory": "convection-ovens",
+    "brand": "unox",
+    "price": 198000,
+    "short": "Electric convection oven with humidity and 4 trays (600x400 mm).",
+    "description": "UNOX XEFR-04EU-ELDP ROSSELLA BAKERLUX SHOP.Pro Convection Oven with Humidity. Electric convection oven with humidity and 4 trays (600x400 mm). Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "4 trays (600x400 mm)",
+      "Humidity function",
+      "6.9 kW, 400 V 3N"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "4 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "6.9 kW",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "400 V 3N",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Dimensions (W×D×H)",
+        "value": "800 × 811 × 502",
+        "unit": "mm"
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "57",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xevc-0511-eprm",
+    "sku": "XEVC-0511-EPRM",
+    "name": "UNOX XEVC-0511-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven GN 1/1",
+    "category": "cooking",
+    "subCategory": "cooking-combi-ovens",
+    "brand": "unox",
+    "price": 435000,
+    "short": "Electric countertop combi oven with 5 GN 1/1 trays. Unox, Italy.",
+    "description": "UNOX XEVC-0511-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven GN 1/1. Electric countertop combi oven with 5 GN 1/1 trays. Unox, Italy. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "5 trays (GN 1/1)",
+      "9.3 kW",
+      "400 V 3N"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "5 x GN 1/1",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "9.3 kW",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "400 V 3N",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "70",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xebc-06eu-e1rm",
+    "sku": "XEBC-06EU-E1RM",
+    "name": "UNOX XEBC-06EU-E1RM BAKERTOP MIND Countertop One Combi Oven",
+    "category": "bakery-baking",
+    "subCategory": "bakery-combi-ovens",
+    "brand": "unox",
+    "price": 512000,
+    "short": "Countertop combi oven with hybrid steam, 6 trays (600x400 mm) and touch controls.",
+    "description": "UNOX XEBC-06EU-E1RM BAKERTOP MIND Countertop One Combi Oven. Countertop combi oven with hybrid steam, 6 trays (600x400 mm) and touch controls. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "6 trays (600x400 mm)",
+      "Hybrid steam",
+      "Touch controls"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "6 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "Over 4.7 kW",
+        "unit": null
+      }
+    ]
+  },
+  {
+    "slug": "unox-xebc-04eu-e1rm",
+    "sku": "XEBC-04EU-E1RM",
+    "name": "UNOX XEBC-04EU-E1RM BAKERTOP Countertop One Combi Oven",
+    "category": "bakery-baking",
+    "subCategory": "bakery-combi-ovens",
+    "brand": "unox",
+    "price": 385000,
+    "short": "Portable countertop combi oven with 4 trays (600x400 mm) and touch screen.",
+    "description": "UNOX XEBC-04EU-E1RM BAKERTOP Countertop One Combi Oven. Portable countertop combi oven with 4 trays (600x400 mm) and touch screen. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "4 trays (600x400 mm)",
+      "Touch screen",
+      "Maximum temperature 260°C"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "4 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Maximum Temperature",
+        "value": "260°C",
+        "unit": null
+      }
+    ]
+  },
+  {
+    "slug": "unox-xefr-06eu-elrv",
+    "sku": "XEFR-06EU-ELRV",
+    "name": "UNOX XEFR-06EU-ELRV BAKERLUX SHOP.Pro Convection Oven with Humidity",
+    "category": "bakery-baking",
+    "subCategory": "convection-ovens",
+    "brand": "unox",
+    "price": 287500,
+    "short": "Tabletop electric convection oven with humidity and 6 trays (600x400 mm).",
+    "description": "UNOX XEFR-06EU-ELRV BAKERLUX SHOP.Pro Convection Oven with Humidity. Tabletop electric convection oven with humidity and 6 trays (600x400 mm). Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "6 trays (600x400 mm)",
+      "Humidity function",
+      "Tabletop installation"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "6 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "380-415 V 3N",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "72",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xebc-10eu-e1rm",
+    "sku": "XEBC-10EU-E1RM",
+    "name": "UNOX XEBC-10EU-E1RM BAKERTOP MIND Countertop Combi Oven",
+    "category": "bakery-baking",
+    "subCategory": "bakery-combi-ovens",
+    "brand": "unox",
+    "price": 656000,
+    "short": "Countertop combi oven with 10 trays (600x400 mm), touch screen and side-opening door.",
+    "description": "UNOX XEBC-10EU-E1RM BAKERTOP MIND Countertop Combi Oven. Countertop combi oven with 10 trays (600x400 mm), touch screen and side-opening door. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "10 trays (600x400 mm)",
+      "Touch screen",
+      "Side-opening door"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "10 x 600x400 mm",
+        "unit": "Trays"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xevl-2011-yprs",
+    "sku": "XEVL-2011-YPRS",
+    "name": "UNOX XEVL-2011-YPRS CHEFTOP MIND BIG PLUS Trolley Combi Oven GN 1/1",
+    "category": "cooking",
+    "subCategory": "cooking-combi-ovens",
+    "brand": "unox",
+    "price": 1390000,
+    "short": "Electric trolley combi oven with 20 GN 1/1 trays, touch screen and side-opening door.",
+    "description": "UNOX XEVL-2011-YPRS CHEFTOP MIND BIG PLUS Trolley Combi Oven GN 1/1. Electric trolley combi oven with 20 GN 1/1 trays, touch screen and side-opening door. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "20 trays (GN 1/1)",
+      "Touch screen",
+      "Side-opening door"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "20 x GN 1/1",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Maximum Temperature",
+        "value": "260°C",
+        "unit": null
+      }
+    ]
+  },
+  {
+    "slug": "unox-xevc-1011-eprm",
+    "sku": "XEVC-1011-EPRM",
+    "name": "UNOX XEVC-1011-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven GN 1/1",
+    "category": "cooking",
+    "subCategory": "cooking-combi-ovens",
+    "brand": "unox",
+    "price": 790000,
+    "short": "Electric countertop combi oven with 10 GN 1/1 trays, touch screen and side-opening door.",
+    "description": "UNOX XEVC-1011-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven GN 1/1. Electric countertop combi oven with 10 GN 1/1 trays, touch screen and side-opening door. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "10 trays (GN 1/1)",
+      "Touch screen",
+      "Side-opening door"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "10 x GN 1/1",
+        "unit": "Trays"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xebpc-08eu-v",
+    "sku": "XEBPC-08EU-V",
+    "name": "UNOX XEBPC-08EU-V LIEVOX Commercial Proofer",
+    "category": "bakery-baking",
+    "subCategory": "proofers",
+    "brand": "unox",
+    "price": 132000,
+    "short": "Oven-controlled proofer for 8 trays (600x400 mm), up to 50°C.",
+    "description": "UNOX XEBPC-08EU-V LIEVOX Commercial Proofer. Oven-controlled proofer for 8 trays (600x400 mm), up to 50°C. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "8 trays (600x400 mm)",
+      "Up to 50°C",
+      "Controlled from the oven"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "8 x 600x400 mm",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Maximum Temperature",
+        "value": "50°C",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "1.2 kW",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "220 V",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Net Weight",
+        "value": "42",
+        "unit": "kg"
+      }
+    ]
+  },
+  {
+    "slug": "unox-xevc-0511-e1rm",
+    "sku": "XEVC-0511-E1RM",
+    "name": "UNOX XEVC-0511-E1RM CHEFTOP MIND.Maps Countertop Combi Oven GN 1/1",
+    "category": "cooking",
+    "subCategory": "cooking-combi-ovens",
+    "brand": "unox",
+    "price": 376000,
+    "short": "Electric countertop combi oven with 5 GN 1/1 trays and touch screen.",
+    "description": "UNOX XEVC-0511-E1RM CHEFTOP MIND.Maps Countertop Combi Oven GN 1/1. Electric countertop combi oven with 5 GN 1/1 trays and touch screen. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Electric",
+    "highlights": [
+      "5 trays (GN 1/1)",
+      "Touch screen",
+      "4.7 kW"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity",
+        "value": "5 x GN 1/1",
+        "unit": "Trays"
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Connected Power",
+        "value": "4.7 kW",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Supply Voltage",
+        "value": "380 V",
+        "unit": null
+      }
+    ]
+  },
+  {
+    "slug": "unox-db1044a0",
+    "sku": "DB1044A0",
+    "name": "UNOX Spray & Rinse Oven Cleaning Detergent (750 ml)",
+    "category": "kitchen-equipment",
+    "subCategory": "kitchen-accessories",
+    "brand": "unox",
+    "price": 1250,
+    "short": "Jet-spray detergent for cleaning the oven chamber, 750 ml bottle.",
+    "description": "UNOX Spray & Rinse Oven Cleaning Detergent (750 ml). Jet-spray detergent for cleaning the oven chamber, 750 ml bottle. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "powerSource": "Passive",
+    "highlights": [
+      "750 ml plastic bottle",
+      "Jet spray, 4 LPM flow",
+      "For oven chamber cleaning"
+    ],
+    "specs": [
+      {
+        "group": "Capacity & Output",
+        "label": "Pack Size",
+        "value": "750",
+        "unit": "ml"
+      }
+    ]
+  }
+]

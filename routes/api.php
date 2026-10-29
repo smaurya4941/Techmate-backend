@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CategoryProductController;
 use App\Http\Controllers\Api\V1\DistributorApplicationController;
 use App\Http\Controllers\Api\V1\EnquiryController;
+use App\Http\Controllers\Api\V1\GoogleReviewsController;
 use App\Http\Controllers\Api\V1\PageController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\QuoteRequestController;
@@ -44,6 +45,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
         Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
         Route::get('/pages/{slug}', [PageController::class, 'show'])->name('pages.show');
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::get('/google-reviews', [GoogleReviewsController::class, 'index'])->name('google-reviews.index');
     });
 
     Route::middleware('throttle:public-submissions')->group(function () {

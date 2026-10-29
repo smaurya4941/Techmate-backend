@@ -26,9 +26,13 @@ class Uploads
 
     private const STORAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'pdf', 'doc', 'docx', 'xls', 'xlsx'];
 
-    public static function image(string $name, string $directory, int $maxKilobytes = 3072): FileUpload
+    /**
+     * @param  ?string  $ratio  e.g. '4:3'. When set, the image editor crops to this ratio and the file is
+     *                          resized to $targetWidth, so every upload on the website has the same shape.
+     */
+    public static function image(string $name, string $directory, int $maxKilobytes = 3072, ?string $ratio = null, int $targetWidth = 1200): FileUpload
     {
-        return FileUpload::make($name)
+        $upload = FileUpload::make($name)
             ->disk('public')
             ->visibility('public')
             ->directory($directory)
@@ -39,6 +43,19 @@ class Uploads
             ->preventFilePathTampering()
             ->getUploadedFileNameForStorageUsing(self::safeName(...))
             ->helperText('JPEG, PNG or WebP, up to '.round($maxKilobytes / 1024).' MB.');
+
+        if ($ratio !== null) {
+            [$w, $h] = array_map('intval', explode(':', $ratio));
+            $upload
+                ->imageCropAspectRatio($ratio)
+                ->imageEditorAspectRatioOptions([$ratio])
+                ->imageResizeMode('cover')
+                ->imageResizeTargetWidth((string) $targetWidth)
+                ->imageResizeTargetHeight((string) (int) round($targetWidth * $h / $w))
+                ->helperText("Use a {$ratio} image (best size {$targetWidth} x ".(int) round($targetWidth * $h / $w).' px). Other shapes are cropped to fit. JPEG, PNG or WebP, up to '.round($maxKilobytes / 1024).' MB.');
+        }
+
+        return $upload;
     }
 
     /** Documents are stored privately; ProductDocument publishes a copy only when approved. */

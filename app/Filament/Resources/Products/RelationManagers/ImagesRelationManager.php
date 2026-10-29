@@ -25,7 +25,7 @@ class ImagesRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema->components([
-            Uploads::image('image_path', 'products/gallery')->label('Image')->required()->columnSpanFull(),
+            Uploads::image('image_path', 'products/gallery', 3072, '4:3')->label('Image (4:3)')->required()->columnSpanFull(),
             TextInput::make('alt_text')->label('Alt text')->required()->maxLength(255)
                 ->helperText('Describe the picture for screen readers and search engines.'),
             TextInput::make('caption')->maxLength(255),

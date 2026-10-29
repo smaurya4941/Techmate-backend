@@ -28,7 +28,8 @@ class ProductController extends Controller
             ->publiclyVisible()
             ->where('slug', $slug)
             ->with([
-                'category:id,name,slug',
+                'category:id,name,slug,parent_id',
+                'category.parent:id,name,slug',
                 'brand:id,name,slug,logo_path,is_active,deleted_at',
                 'images',
                 'specifications',

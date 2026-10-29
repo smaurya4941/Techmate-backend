@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->brandName('Techmate Admin')
+            ->brandLogo(asset('images/techmate-logo.png'))
+            ->brandLogoHeight('2.75rem')
             // Staff accounts are provisioned by a Super Admin or `php artisan techmate:create-admin`;
             // there is intentionally no ->registration().
             ->login()

@@ -27,6 +27,9 @@ class ProductSummaryResource extends JsonResource
             // Quote-first catalogue: null means "price on request". Indicative only.
             'price' => $this->price,
             'currency_code' => $this->currency_code,
+            'power_source' => $this->power_source,
+            'warranty_period' => $this->warranty_period,
+            'key_highlights' => $this->key_highlights ?? [],
             'is_featured' => $this->is_featured,
             'image_url' => MediaUrl::for($this->primary_image_path),
             'published_at' => $this->published_at?->toIso8601String(),
@@ -34,6 +37,10 @@ class ProductSummaryResource extends JsonResource
                 'id' => $this->category->id,
                 'name' => $this->category->name,
                 'slug' => $this->category->slug,
+                // Sub-category products also report their top-level category.
+                'parent' => $this->category->relationLoaded('parent') && $this->category->parent
+                    ? ['name' => $this->category->parent->name, 'slug' => $this->category->parent->slug]
+                    : null,
             ] : null),
             // A brand that is inactive or soft-deleted is hidden, not leaked.
             'brand' => $this->whenLoaded('brand', function () {

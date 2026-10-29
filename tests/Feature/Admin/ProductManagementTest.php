@@ -65,6 +65,31 @@ class ProductManagementTest extends AdminTestCase
         $this->assertNotNull($product->created_by);
     }
 
+    public function test_technical_details_are_saved_and_exposed_by_the_public_api(): void
+    {
+        $parent = Category::factory()->create(['slug' => 'cooking']);
+        $sub = Category::factory()->create(['slug' => 'cooking-combi-ovens', 'parent_id' => $parent->id]);
+
+        Livewire::actingAs($this->catalogueManager())
+            ->test(CreateProduct::class)
+            ->fillForm($this->validData($sub, [
+                'status' => 'published',
+                'power_source' => 'Electric',
+                'warranty_period' => '1 year',
+                'key_highlights' => [['highlight' => '6 trays (600x400 mm)'], ['highlight' => 'Touch screen']],
+            ]))
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->getJson('/api/v1/products/combi-oven-10-tray')
+            ->assertOk()
+            ->assertJsonPath('data.power_source', 'Electric')
+            ->assertJsonPath('data.warranty_period', '1 year')
+            ->assertJsonPath('data.key_highlights', ['6 trays (600x400 mm)', 'Touch screen'])
+            ->assertJsonPath('data.category.slug', 'cooking-combi-ovens')
+            ->assertJsonPath('data.category.parent.slug', 'cooking');
+    }
+
     public function test_duplicate_sku_and_slug_are_rejected_on_create_and_edit(): void
     {
         $category = Category::factory()->create();

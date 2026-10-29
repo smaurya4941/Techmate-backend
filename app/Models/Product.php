@@ -30,9 +30,17 @@ class Product extends Model
      *
      * @var list<string>
      */
+    public const POWER_SOURCES = [
+        'Electric' => 'Electric',
+        'Gas' => 'Gas',
+        'Dual Fuel' => 'Dual Fuel',
+        'Passive' => 'Passive (no power needed)',
+    ];
+
     protected $fillable = [
         'category_id', 'brand_id', 'name', 'slug', 'sku', 'short_description',
         'description', 'price', 'currency_code', 'primary_image_path',
+        'power_source', 'warranty_period', 'key_highlights',
         'is_featured', 'sort_order',
     ];
 
@@ -44,6 +52,7 @@ class Product extends Model
         return [
             'price' => 'decimal:2',
             'is_featured' => 'boolean',
+            'key_highlights' => 'array',
             'sort_order' => 'integer',
             'published_at' => 'datetime',
         ];

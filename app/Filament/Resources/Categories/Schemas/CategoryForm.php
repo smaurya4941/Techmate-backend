@@ -32,7 +32,7 @@ class CategoryForm
                         ->pluck('name', 'id'))
                     ->searchable()
                     ->rule(fn (?Category $record): Closure => self::parentRule($record)),
-                Uploads::image('image_path', 'categories', 3072)->label('Image'),
+                Uploads::image('image_path', 'categories', 3072, '3:2')->label('Category image (3:2)'),
                 Textarea::make('description')->rows(4)->maxLength(2000)->columnSpanFull(),
             ]),
             Section::make('Visibility & SEO')->columns(2)->schema([
