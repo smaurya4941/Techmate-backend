@@ -179,7 +179,9 @@ class LeadManagementTest extends AdminTestCase
 
         $lead->refresh();
         $this->assertSame('qualified', $lead->status);
-        $this->assertNotNull($lead->last_contacted_at);
+        // A status change is not a customer contact: only logged calls, e-mails and meetings count.
+        $this->assertNull($lead->last_contacted_at);
+        $this->assertNull($lead->first_response_at);
 
         $changes = $lead->activities()->where('activity_type', 'status_change')->get();
         $this->assertSame(['new', 'contacted'], [$changes[0]->old_status, $changes[0]->new_status]);
@@ -201,13 +203,20 @@ class LeadManagementTest extends AdminTestCase
         $this->assertSame(0, $lead->activities()->count());
     }
 
-    public function test_closing_a_lead_stamps_closed_at(): void
+    public function test_won_and_lost_cannot_be_set_through_the_status_action(): void
     {
-        $lead = Lead::factory()->status('proposal')->create(['assigned_to' => $this->exec->id]);
+        $lead = Lead::factory()->status('quotation_sent')->create(['assigned_to' => $this->manager->id]);
 
-        $this->workflow()->changeStatus($lead, 'won', $this->exec);
-
-        $this->assertNotNull($lead->fresh()->closed_at);
+        foreach (['won', 'lost'] as $status) {
+            try {
+                $this->workflow()->changeStatus($lead, $status, $this->manager);
+                $this->fail('Closing needs the outcome action.');
+            } catch (ValidationException $e) {
+                $this->assertStringContainsString('outcome', $e->getMessage());
+            }
+        }
+        $this->assertSame('quotation_sent', $lead->fresh()->status);
+        $this->assertNull($lead->fresh()->closed_at);
     }
 
     public function test_status_cannot_be_changed_on_someone_elses_lead(): void
@@ -231,8 +240,11 @@ class LeadManagementTest extends AdminTestCase
         $this->workflow()->logActivity($lead, 'note', 'Customer prefers gas ovens.', $this->exec);
         $this->workflow()->logActivity($lead, 'call', 'Discussed delivery timelines.', $this->exec, now()->subHour());
 
-        $this->assertSame(['call', 'note'], $lead->activities()->pluck('activity_type')->sort()->values()->all());
+        // The logged call is a real contact: the lead moves to contacted and the first response is stamped.
+        $this->assertSame(['call', 'note', 'status_change'], $lead->activities()->pluck('activity_type')->sort()->values()->all());
         $this->assertNotNull($lead->fresh()->last_contacted_at);
+        $this->assertNotNull($lead->fresh()->first_response_at);
+        $this->assertSame('contacted', $lead->fresh()->status);
 
         Livewire::actingAs($this->exec)->test(ActivitiesRelationManager::class, ['ownerRecord' => $lead, 'pageClass' => ViewLead::class])
             ->assertCanSeeTableRecords($lead->activities)
@@ -273,7 +285,7 @@ class LeadManagementTest extends AdminTestCase
         $second = $this->workflow()->scheduleFollowUp($lead, ['title' => 'Check budget', 'due_at' => now()->addDays(2), 'assigned_to' => $this->exec->id], $this->exec);
 
         $this->assertSame($this->exec->id, $first->assigned_to);
-        $this->assertSame('pending', $first->status);
+        $this->assertSame('open', $first->status);
 
         $this->workflow()->completeFollowUp($first, $this->exec);
         $this->workflow()->cancelFollowUp($second, $this->exec);
@@ -282,7 +294,7 @@ class LeadManagementTest extends AdminTestCase
         $this->assertNotNull($first->fresh()->completed_at);
         $this->assertSame('cancelled', $second->fresh()->status);
         $this->assertNull($second->fresh()->completed_at);
-        $this->assertSame(2, $lead->activities()->where('activity_type', 'note')->count());
+        $this->assertSame(4, $lead->activities()->where('activity_type', 'follow_up')->count());
 
         try {
             $this->workflow()->completeFollowUp($first, $this->exec);

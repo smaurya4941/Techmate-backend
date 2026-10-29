@@ -15,7 +15,7 @@ class FollowUpFactory extends Factory
             'lead_id' => Lead::factory(),
             'title' => 'Sample follow-up',
             'due_at' => now()->addDay(),
-            'status' => 'pending',
+            'status' => 'open',
         ];
     }
 }

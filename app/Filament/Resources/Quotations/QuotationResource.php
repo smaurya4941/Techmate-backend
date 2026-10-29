@@ -2,12 +2,17 @@
 
 namespace App\Filament\Resources\Quotations;
 
+use App\Filament\Resources\Quotations\Pages\CreateQuotation;
+use App\Filament\Resources\Quotations\Pages\EditQuotation;
 use App\Filament\Resources\Quotations\Pages\ListQuotations;
 use App\Filament\Resources\Quotations\Pages\ViewQuotation;
+use App\Filament\Resources\Quotations\RelationManagers\EventsRelationManager;
+use App\Filament\Resources\Quotations\Schemas\QuotationForm;
 use App\Filament\Resources\Quotations\Schemas\QuotationInfolist;
 use App\Filament\Resources\Quotations\Tables\QuotationsTable;
 use App\Models\Quotation;
 use App\Policies\QuotationPolicy;
+use App\Support\Permissions;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -16,9 +21,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Oversight only: quotations are listed and viewed, never created or edited
- * here, so issued snapshots and totals stay immutable. Visibility is scoped in
- * getEloquentQuery() exactly like leads.
+ * Quotations are prepared from a lead (Create needs ?lead=ID), edited only while draft,
+ * and moved through approval, sending and the customer's response by QuotationService.
+ * Visibility is scoped in getEloquentQuery() exactly like leads.
  */
 class QuotationResource extends Resource
 {
@@ -37,9 +42,26 @@ class QuotationResource extends Resource
         return QuotationPolicy::scope(parent::getEloquentQuery(), auth()->user());
     }
 
+    /** Quotations are only ever created from a lead, so there is no standalone "New" button. */
     public static function canCreate(): bool
     {
-        return false;
+        return auth()->user()?->hasPermission(Permissions::QUOTATIONS_MANAGE) ?? false;
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        if (! auth()->user()->hasPermission(Permissions::QUOTATIONS_APPROVE)) {
+            return null;
+        }
+
+        $count = static::getEloquentQuery()->where('status', 'pending_approval')->count();
+
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function form(Schema $schema): Schema
+    {
+        return QuotationForm::configure($schema);
     }
 
     public static function infolist(Schema $schema): Schema
@@ -52,11 +74,18 @@ class QuotationResource extends Resource
         return QuotationsTable::configure($table);
     }
 
+    public static function getRelations(): array
+    {
+        return [EventsRelationManager::class];
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => ListQuotations::route('/'),
+            'create' => CreateQuotation::route('/create'),
             'view' => ViewQuotation::route('/{record}'),
+            'edit' => EditQuotation::route('/{record}/edit'),
         ];
     }
 }

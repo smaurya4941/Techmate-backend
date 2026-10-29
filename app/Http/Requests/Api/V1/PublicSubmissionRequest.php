@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\V1;
 
 use App\Rules\PhoneNumber;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
 
 /**
  * Shared base for anonymous write endpoints: contact-field rules, a honeypot
@@ -25,6 +26,9 @@ abstract class PublicSubmissionRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        // The header is the only place a retry key is accepted; it overrides any body field.
+        $this->merge(['idempotency_key' => $this->header('Idempotency-Key')]);
+
         if (is_string($this->input('country_code'))) {
             $this->merge(['country_code' => strtoupper($this->input('country_code'))]);
         }
@@ -36,6 +40,7 @@ abstract class PublicSubmissionRequest extends FormRequest
         $rules = [
             // Honeypot: invisible to humans, so any value means an automated submission.
             'hp_field' => ['prohibited'],
+            'idempotency_key' => ['nullable', 'string', 'regex:/^[A-Za-z0-9_\-]{8,64}$/'],
         ];
 
         foreach (self::PRIVILEGED as $field) {
@@ -58,7 +63,21 @@ abstract class PublicSubmissionRequest extends FormRequest
             'postal_code' => ['nullable', 'string', 'max:20', 'regex:/^[A-Za-z0-9][A-Za-z0-9 \-]*$/'],
             'country_code' => ['nullable', 'string', 'size:2', 'alpha'],
             'consent' => ['nullable', 'boolean'],
+            // Approved attribution only: a site path and a campaign label, never a full URL or visitor profile.
+            'source_page' => ['nullable', 'string', 'max:255', 'regex:#^/(?!/)[A-Za-z0-9/_\-.]*$#'],
+            'campaign' => ['nullable', 'string', 'max:100', 'regex:/^[A-Za-z0-9 _\-.]+$/'],
         ];
+    }
+
+    public function idempotencyKey(): ?string
+    {
+        return $this->validated('idempotency_key') ?: null;
+    }
+
+    /** When the request reached the API (the customer's submission moment). */
+    public function submittedAt(): Carbon
+    {
+        return Carbon::createFromTimestamp($this->server('REQUEST_TIME_FLOAT', microtime(true)));
     }
 
     /** @return array<string, string> */

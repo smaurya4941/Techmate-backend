@@ -20,7 +20,7 @@ class CreateAdminUser extends Command
     protected $signature = 'techmate:create-admin
         {--name= : Full name}
         {--email= : Login email}
-        {--role=super_admin : super_admin, catalogue_manager, sales_executive or sales_manager}';
+        {--role=super_admin : super_admin, catalogue_manager, sales_executive, sales_manager or operations}';
 
     protected $description = 'Create a staff account for the /admin panel (defaults to a Super Admin)';
 

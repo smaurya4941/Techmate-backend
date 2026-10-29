@@ -2,16 +2,15 @@
 
 namespace App\Filament\Resources\Leads\RelationManagers;
 
-use App\Filament\Support\Guarded;
+use App\Filament\Support\FollowUpActions;
+use App\Filament\Support\Status;
 use App\Models\FollowUp;
-use App\Services\LeadWorkflow;
-use Filament\Actions\Action;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
-/** Follow-ups are scheduled from the lead header; here they are completed or cancelled, never deleted. */
+/** Follow-ups are scheduled from the lead header; here they are progressed or closed, never deleted. */
 class FollowUpsRelationManager extends RelationManager
 {
     protected static string $relationship = 'followUps';
@@ -36,27 +35,14 @@ class FollowUpsRelationManager extends RelationManager
                 // Overdue is derived from status + due date, not stored.
                 TextColumn::make('display_status')->label('Status')->badge()
                     ->state(fn (FollowUp $record) => $record->isOverdue() ? 'overdue' : $record->status)
-                    ->color(fn ($state) => match ($state) {
-                        'overdue' => 'danger', 'completed' => 'success', 'cancelled' => 'gray', default => 'warning',
-                    })
-                    ->formatStateUsing(fn ($state) => ucfirst($state)),
+                    ->color(fn ($state) => Status::FOLLOW_UP[$state] ?? 'gray')
+                    ->formatStateUsing(fn ($state) => Status::label($state)),
                 TextColumn::make('completed_at')->label('Completed')->dateTime('d M Y H:i')->placeholder('-'),
             ])
             ->defaultSort('due_at', 'asc')
             ->filters([
-                SelectFilter::make('status')->options(['pending' => 'Pending', 'completed' => 'Completed', 'cancelled' => 'Cancelled']),
+                SelectFilter::make('status')->options(Status::options(FollowUp::STATUSES)),
             ])
-            ->recordActions([
-                Action::make('complete')->label('Complete')->icon('heroicon-o-check-circle')->color('success')
-                    ->requiresConfirmation()->authorize('update')
-                    ->visible(fn (FollowUp $record) => $record->status === 'pending')
-                    ->action(fn (FollowUp $record) => Guarded::run(
-                        fn () => app(LeadWorkflow::class)->completeFollowUp($record, auth()->user()), 'Follow-up completed')),
-                Action::make('cancel')->label('Cancel')->icon('heroicon-o-x-circle')->color('gray')
-                    ->requiresConfirmation()->authorize('update')
-                    ->visible(fn (FollowUp $record) => $record->status === 'pending')
-                    ->action(fn (FollowUp $record) => Guarded::run(
-                        fn () => app(LeadWorkflow::class)->cancelFollowUp($record, auth()->user()), 'Follow-up cancelled')),
-            ]);
+            ->recordActions(FollowUpActions::all());
     }
 }

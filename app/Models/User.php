@@ -25,11 +25,14 @@ class User extends Authenticatable implements FilamentUser
 
     public const ROLE_SALES_MANAGER = 'sales_manager';
 
+    public const ROLE_OPERATIONS = 'operations';
+
     public const ROLES = [
         self::ROLE_SUPER_ADMIN,
         self::ROLE_CATALOGUE_MANAGER,
         self::ROLE_SALES_EXECUTIVE,
         self::ROLE_SALES_MANAGER,
+        self::ROLE_OPERATIONS,
     ];
 
     public const ROLE_LABELS = [
@@ -37,6 +40,7 @@ class User extends Authenticatable implements FilamentUser
         self::ROLE_CATALOGUE_MANAGER => 'Catalogue Manager',
         self::ROLE_SALES_EXECUTIVE => 'Sales Executive',
         self::ROLE_SALES_MANAGER => 'Sales Manager',
+        self::ROLE_OPERATIONS => 'Operations',
     ];
 
     /**

@@ -13,11 +13,12 @@ class EnquiryController extends Controller
 
     public function store(EnquiryRequest $request): JsonResponse
     {
-        $lead = $this->leads->createEnquiry($request->validated());
+        [$lead, $created] = $this->leads->createEnquiry($request->validated(), $request->idempotencyKey(), $request->submittedAt());
 
+        // A replayed Idempotency-Key returns the original reference with 200 instead of creating a second lead.
         return response()->json([
             'message' => 'Enquiry submitted successfully.',
             'data' => ['reference' => $lead->public_reference],
-        ], 201);
+        ], $created ? 201 : 200);
     }
 }

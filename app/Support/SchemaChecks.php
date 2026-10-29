@@ -27,6 +27,26 @@ class SchemaChecks
         DB::statement("ALTER TABLE `{$table}` ADD CONSTRAINT `{$table}_{$name}` CHECK ({$expression})");
     }
 
+    public static function drop(string $table, string $name): void
+    {
+        if (! self::supported()) {
+            return;
+        }
+
+        DB::statement("ALTER TABLE `{$table}` DROP CONSTRAINT `{$table}_{$name}`");
+    }
+
+    /**
+     * Replaces an allowed-values CHECK after the enum list has changed.
+     *
+     * @param  list<string>  $values
+     */
+    public static function replaceIn(string $table, string $column, array $values): void
+    {
+        self::drop($table, "{$column}_valid");
+        self::in($table, $column, $values);
+    }
+
     /**
      * @param  list<string>  $values
      */

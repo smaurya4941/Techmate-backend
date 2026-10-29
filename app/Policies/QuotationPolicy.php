@@ -2,15 +2,17 @@
 
 namespace App\Policies;
 
+use App\Models\Lead;
 use App\Models\Quotation;
 use App\Models\User;
 use App\Support\Permissions;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Phase 5 provides quotation oversight only. Quotation content is never edited
- * from the panel (issued snapshots stay immutable); only the status may move
- * along Quotation::TRANSITIONS, and only for roles holding quotations.update_status.
+ * Quotation access follows lead visibility: managers and admins see everything, an
+ * executive only quotations on leads assigned to them. Preparing and sending needs
+ * quotations.manage; approving needs quotations.approve. Issued quotations are never
+ * edited in place (QuotationService enforces draft-only edits), and nothing is deleted.
  */
 class QuotationPolicy
 {
@@ -42,21 +44,30 @@ class QuotationPolicy
             && $quotation->lead?->assigned_to === $user->getKey();
     }
 
-    public function create(User $user): bool
+    /** Preparing a quotation for a lead the user can see (Filament's resource-level create check passes no lead). */
+    public function create(User $user, ?Lead $lead = null): bool
     {
-        return false;
+        if (! $user->hasPermission(Permissions::QUOTATIONS_MANAGE)) {
+            return false;
+        }
+
+        return $lead === null || LeadPolicy::canSee($user, $lead);
+    }
+
+    /** Edit a draft, submit, send, revise, record the customer's response, cancel. */
+    public function manage(User $user, Quotation $quotation): bool
+    {
+        return $user->hasPermission(Permissions::QUOTATIONS_MANAGE) && $this->view($user, $quotation);
     }
 
     public function update(User $user, Quotation $quotation): bool
     {
-        return false;
+        return $this->manage($user, $quotation) && $quotation->isEditable();
     }
 
-    public function updateStatus(User $user, Quotation $quotation): bool
+    public function approve(User $user, Quotation $quotation): bool
     {
-        return $user->hasPermission(Permissions::QUOTATIONS_UPDATE_STATUS)
-            && $this->view($user, $quotation)
-            && $quotation->nextStatuses() !== [];
+        return $user->hasPermission(Permissions::QUOTATIONS_APPROVE) && $this->view($user, $quotation);
     }
 
     public function delete(User $user, Quotation $quotation): bool

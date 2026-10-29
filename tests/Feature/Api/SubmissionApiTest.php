@@ -6,10 +6,11 @@ use App\Models\DistributorApplication;
 use App\Models\Lead;
 use App\Models\LeadActivity;
 use App\Models\LeadProduct;
+use App\Models\NotificationOutbox;
 use App\Models\Product;
 use App\Models\Quotation;
 use App\Notifications\NewSubmissionAlert;
-use App\Notifications\SubmissionAcknowledgement;
+use App\Notifications\RenderedMail;
 use Illuminate\Support\Facades\Notification;
 use Tests\DatabaseTestCase;
 
@@ -81,7 +82,8 @@ class SubmissionApiTest extends DatabaseTestCase
 
         $lead = Lead::firstOrFail();
         $this->assertSame($lead->public_reference, $response->json('data.reference'));
-        $this->assertMatchesRegularExpression('/^TM-[A-Z2-9]{10}$/', $lead->public_reference);
+        $this->assertMatchesRegularExpression('/^TMI-\d{4}-\d{6}$/', $lead->public_reference);
+        $this->assertNotNull($lead->submitted_at);
         $this->assertSame('general', $lead->lead_type);
         $this->assertSame('new', $lead->status);
         $this->assertSame('normal', $lead->priority);
@@ -96,22 +98,31 @@ class SubmissionApiTest extends DatabaseTestCase
     {
         $this->postJson('/api/v1/enquiries', $this->enquiry())->assertCreated();
 
-        Notification::assertSentOnDemand(SubmissionAcknowledgement::class, fn ($n, $channels, $notifiable) => $notifiable->routes['mail'] === 'asha@example.com');
-        Notification::assertSentOnDemand(NewSubmissionAlert::class, fn ($n, $channels, $notifiable) => $notifiable->routes['mail'] === 'sales@example.test');
+        $reference = Lead::firstOrFail()->public_reference;
+
+        Notification::assertSentOnDemand(RenderedMail::class, fn ($n, $channels, $notifiable) => $notifiable->routes['mail'] === 'asha@example.com'
+            && str_contains($n->toMail($notifiable)->subject, $reference));
+        Notification::assertSentOnDemand(RenderedMail::class, fn ($n, $channels, $notifiable) => $notifiable->routes['mail'] === 'sales@example.test'
+            && str_contains($n->toMail($notifiable)->subject, $reference));
+        $this->assertSame(2, NotificationOutbox::where('status', 'sent')->count());
     }
 
     public function test_enquiry_succeeds_when_notifications_cannot_be_queued(): void
     {
         Notification::swap(new class
         {
-            public function route(): never
+            public function sendNow(): never
             {
                 throw new \RuntimeException('queue down');
             }
         });
 
         $this->postJson('/api/v1/enquiries', $this->enquiry())->assertCreated();
+
+        // The lead is safe; the undelivered e-mails stay in the outbox, pending a retry, with the failure recorded.
         $this->assertSame(1, Lead::count());
+        $this->assertSame(2, NotificationOutbox::where('status', 'pending')->where('attempts', 1)->count());
+        $this->assertStringContainsString('queue down', (string) NotificationOutbox::first()->last_error);
     }
 
     public function test_enquiry_validation_errors_use_the_standard_envelope(): void
@@ -208,7 +219,7 @@ class SubmissionApiTest extends DatabaseTestCase
         $this->assertSame('Combi Oven', $line->fresh()->product_name_snapshot);
 
         $this->assertSame(0, Quotation::count(), 'A quote request must not create an issued quotation.');
-        Notification::assertSentOnDemandTimes(SubmissionAcknowledgement::class, 1);
+        Notification::assertSentOnDemandTimes(RenderedMail::class, 2); // customer + sales, once each
     }
 
     public function test_quote_request_rejects_ineligible_products(): void

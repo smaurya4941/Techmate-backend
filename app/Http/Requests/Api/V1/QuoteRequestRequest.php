@@ -9,7 +9,7 @@ use Illuminate\Validation\Validator;
 
 class QuoteRequestRequest extends PublicSubmissionRequest
 {
-    public const SOURCES = ['website', 'request_quote_page', 'product_page', 'home_page'];
+    public const SOURCES = ['website', 'request_quote_page', 'product_page', 'category_page', 'home_page'];
 
     public const BUSINESS_TYPES = ['restaurant', 'bakery', 'cloud-kitchen', 'catering', 'dealer', 'other'];
 

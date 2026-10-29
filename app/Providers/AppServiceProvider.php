@@ -12,6 +12,7 @@ use App\Models\ProductSpecification;
 use App\Models\Setting;
 use App\Models\User;
 use App\Observers\PublicContentObserver;
+use Filament\Support\Facades\FilamentTimezone;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -41,6 +42,9 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->isProduction()) {
             URL::forceHttps();
         }
+
+        // Stored in UTC; staff see dates in the business timezone.
+        FilamentTimezone::set(config('techmate.business_timezone'));
 
         $this->configureRateLimiting();
         $this->registerPublicContentObservers();

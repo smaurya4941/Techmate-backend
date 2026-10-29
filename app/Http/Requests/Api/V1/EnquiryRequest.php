@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 
 class EnquiryRequest extends PublicSubmissionRequest
 {
-    public const SOURCES = ['website', 'contact_page', 'home_page'];
+    public const SOURCES = ['website', 'contact_page', 'home_page', 'product_page', 'category_page'];
 
     /** @return array<string, mixed> */
     public function rules(): array

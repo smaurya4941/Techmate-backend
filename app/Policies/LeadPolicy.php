@@ -64,6 +64,21 @@ class LeadPolicy
         return $user->hasPermission(Permissions::LEADS_ASSIGN) && self::canSee($user, $lead);
     }
 
+    public function markWon(User $user, Lead $lead): bool
+    {
+        return $user->hasPermission(Permissions::LEADS_MARK_WON) && self::canSee($user, $lead);
+    }
+
+    public function markLost(User $user, Lead $lead): bool
+    {
+        return $user->hasPermission(Permissions::LEADS_MARK_LOST) && self::canSee($user, $lead);
+    }
+
+    public function reopen(User $user, Lead $lead): bool
+    {
+        return $user->hasPermission(Permissions::LEADS_REOPEN) && self::canSee($user, $lead);
+    }
+
     public function delete(User $user, Lead $lead): bool
     {
         return false;

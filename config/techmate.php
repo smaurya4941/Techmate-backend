@@ -38,4 +38,25 @@ return [
     'notifications' => [
         'queue' => env('TECHMATE_NOTIFICATION_QUEUE', 'default'),
     ],
+
+    /*
+    | Timestamps are stored in UTC. This is the business timezone used when dates are
+    | shown to staff or customers and to decide what "today" means for follow-ups.
+    */
+    'business_timezone' => env('TECHMATE_TIMEZONE', 'Asia/Kolkata'),
+
+    /*
+    | Inbox for new-order notices to fulfilment. Falls back to the sales inbox.
+    */
+    'operations_notification_email' => env('TECHMATE_OPERATIONS_EMAIL'),
+
+    'sales' => [
+        // Quotation validity applied when the executive leaves "valid until" empty.
+        'quotation_valid_days' => (int) env('TECHMATE_QUOTATION_VALID_DAYS', 30),
+        // Default tax rate pre-filled on new quotation lines (percent). The accountant owns the real rule.
+        'default_tax_rate' => env('TECHMATE_DEFAULT_TAX_RATE', '18'),
+        'default_currency' => env('TECHMATE_DEFAULT_CURRENCY', 'INR'),
+        // Heads-up reminder pre-filled on new follow-ups (minutes before due). Null = none.
+        'default_reminder_minutes' => 30,
+    ],
 ];

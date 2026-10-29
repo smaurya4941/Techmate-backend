@@ -21,6 +21,9 @@ class MigrationRollbackTest extends TestCase
         'quotations', 'quotation_items', 'pages', 'settings',
         // Phase 4 addition, rolled back with the rest.
         'distributor_applications',
+        // Phase 7 additions.
+        'sequences', 'customers', 'notification_outbox', 'audit_logs', 'quotation_events',
+        'orders', 'order_items', 'order_events', 'payments',
     ];
 
     public function test_phase_three_migrations_roll_back_and_re_apply_cleanly(): void
@@ -38,7 +41,7 @@ class MigrationRollbackTest extends TestCase
                 $this->assertTrue(Schema::hasTable($table), "{$table} missing after migrate");
             }
 
-            $this->assertSame(0, Artisan::call('migrate:rollback', ['--step' => 18, '--force' => true]));
+            $this->assertSame(0, Artisan::call('migrate:rollback', ['--step' => 21, '--force' => true]));
 
             foreach (self::PHASE3_TABLES as $table) {
                 $this->assertFalse(Schema::hasTable($table), "{$table} still present after rollback");

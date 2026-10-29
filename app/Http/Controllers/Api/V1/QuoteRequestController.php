@@ -13,11 +13,13 @@ class QuoteRequestController extends Controller
 
     public function store(QuoteRequestRequest $request): JsonResponse
     {
-        $lead = $this->leads->createQuoteRequest($request->validated(), $request->lineItems());
+        [$lead, $created] = $this->leads->createQuoteRequest(
+            $request->validated(), $request->lineItems(), $request->idempotencyKey(), $request->submittedAt()
+        );
 
         return response()->json([
             'message' => 'Quote request submitted successfully.',
             'data' => ['reference' => $lead->public_reference],
-        ], 201);
+        ], $created ? 201 : 200);
     }
 }

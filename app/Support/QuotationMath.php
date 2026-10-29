@@ -18,7 +18,10 @@ use Brick\Math\RoundingMode;
  *   subtotal       = sum(gross)
  *   discount_total = sum(discount_amount)
  *   tax_total      = sum(tax_amount)
- *   grand_total    = subtotal - discount_total + tax_total
+ *   grand_total    = subtotal - discount_total + tax_total + freight_amount
+ *
+ * Freight / other charges are added after tax and are not themselves taxed; a different
+ * policy (taxable freight) is a business decision that must change this one method.
  *
  * Values are strings so no float ever touches money.
  */
@@ -58,13 +61,18 @@ class QuotationMath
 
     /**
      * @param  list<array{gross: string, discount_amount: string, tax_amount: string}>  $lines
-     * @return array{subtotal: string, discount_total: string, tax_total: string, grand_total: string}
+     * @return array{subtotal: string, discount_total: string, tax_total: string, freight_amount: string, grand_total: string}
      */
-    public static function totals(array $lines): array
+    public static function totals(array $lines, string $freight = '0'): array
     {
         $subtotal = BigDecimal::zero()->toScale(2);
         $discount = BigDecimal::zero()->toScale(2);
         $tax = BigDecimal::zero()->toScale(2);
+        $freightAmount = BigDecimal::of($freight)->toScale(2, RoundingMode::HALF_UP);
+
+        if ($freightAmount->isNegative()) {
+            throw new \InvalidArgumentException('Freight cannot be negative.');
+        }
 
         foreach ($lines as $line) {
             $subtotal = $subtotal->plus($line['gross']);
@@ -76,7 +84,8 @@ class QuotationMath
             'subtotal' => (string) $subtotal,
             'discount_total' => (string) $discount,
             'tax_total' => (string) $tax,
-            'grand_total' => (string) $subtotal->minus($discount)->plus($tax),
+            'freight_amount' => (string) $freightAmount,
+            'grand_total' => (string) $subtotal->minus($discount)->plus($tax)->plus($freightAmount),
         ];
     }
 }

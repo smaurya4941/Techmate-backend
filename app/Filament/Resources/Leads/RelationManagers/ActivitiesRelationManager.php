@@ -2,8 +2,11 @@
 
 namespace App\Filament\Resources\Leads\RelationManagers;
 
+use App\Filament\Support\Status;
+use App\Models\LeadActivity;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 /**
@@ -29,14 +32,18 @@ class ActivitiesRelationManager extends RelationManager
             ->columns([
                 TextColumn::make('occurred_at')->label('When')->dateTime('d M Y H:i')->sortable(),
                 TextColumn::make('activity_type')->label('Type')->badge()
-                    ->formatStateUsing(fn ($state) => str_replace('_', ' ', ucfirst($state))),
+                    ->formatStateUsing(fn ($state) => Status::label($state)),
                 TextColumn::make('description')->wrap()->placeholder('-')->limit(300),
                 TextColumn::make('status_change')->label('Status change')
-                    ->state(fn ($record) => $record->new_status ? ucfirst((string) $record->old_status).' → '.ucfirst($record->new_status) : null)
+                    ->state(fn ($record) => $record->new_status ? Status::label($record->old_status).' → '.Status::label($record->new_status) : null)
                     ->placeholder('-'),
                 TextColumn::make('user.name')->label('By')->placeholder('System'),
             ])
-            ->defaultSort('occurred_at', 'asc')
+            ->defaultSort('occurred_at', 'desc')
+            ->filters([
+                SelectFilter::make('activity_type')->label('Type')->multiple()
+                    ->options(Status::options(LeadActivity::TYPES)),
+            ])
             ->paginated([10, 25, 50]);
     }
 }

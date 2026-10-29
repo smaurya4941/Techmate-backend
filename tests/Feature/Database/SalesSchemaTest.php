@@ -23,13 +23,15 @@ use Tests\DatabaseTestCase;
 
 class SalesSchemaTest extends DatabaseTestCase
 {
-    public function test_lead_gets_unique_non_sequential_reference_and_internal_fields_are_protected(): void
+    public function test_lead_gets_unique_sequential_reference_and_internal_fields_are_protected(): void
     {
         $a = Lead::create(['customer_name' => 'A', 'email' => 'a@example.test', 'status' => 'won', 'priority' => 'urgent', 'assigned_to' => 1])->fresh();
         $b = Lead::create(['customer_name' => 'B', 'phone' => '+10000000001'])->fresh();
 
-        $this->assertMatchesRegularExpression('/^TM-[A-Z2-9]{10}$/', $a->public_reference);
-        $this->assertNotSame($a->public_reference, $b->public_reference);
+        $year = now()->utc()->format('Y');
+        $this->assertSame("TMI-{$year}-000001", $a->public_reference);
+        $this->assertSame("TMI-{$year}-000002", $b->public_reference);
+        $this->assertNotNull($a->submitted_at);
         $this->assertSame(['new', 'normal', null], [$a->status, $a->priority, $a->assigned_to]);
     }
 
@@ -149,8 +151,10 @@ class SalesSchemaTest extends DatabaseTestCase
         $a = Quotation::factory()->create()->fresh();
         $b = Quotation::factory()->create()->fresh();
 
-        $this->assertMatchesRegularExpression('/^QT-\d{6}-[A-Z2-9]{6}$/', $a->quotation_number);
-        $this->assertNotSame($a->quotation_number, $b->quotation_number);
+        $year = now()->utc()->format('Y');
+        $this->assertSame("QT-{$year}-000001-V1", $a->quotation_number);
+        $this->assertSame("QT-{$year}-000002-V1", $b->quotation_number);
+        $this->assertSame("QT-{$year}-000001", $a->series_number);
 
         $this->expectException(QueryException::class);
         Quotation::factory()->create(['quotation_number' => $a->quotation_number]);
@@ -165,7 +169,8 @@ class SalesSchemaTest extends DatabaseTestCase
 
         $draft = new Quotation(['status' => 'draft']);
         $draft->status = 'draft';
-        $this->assertTrue($draft->canTransitionTo('sent'));
+        $this->assertTrue($draft->canTransitionTo('pending_approval'));
+        $this->assertFalse($draft->canTransitionTo('sent'), 'A quotation must be approved before it is sent.');
         $this->assertFalse($draft->canTransitionTo('accepted'));
         $draft->status = 'accepted';
         $this->assertFalse($draft->canTransitionTo('cancelled'));

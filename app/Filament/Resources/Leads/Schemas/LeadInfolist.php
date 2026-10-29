@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Leads\Schemas;
 
-use App\Filament\Resources\Leads\Tables\LeadsTable;
+use App\Filament\Resources\Orders\OrderResource;
+use App\Filament\Support\Status;
+use App\Models\Lead;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
@@ -16,15 +18,34 @@ class LeadInfolist
             Section::make('Lead')->columns(4)->schema([
                 TextEntry::make('public_reference')->label('Reference')->copyable()->weight('bold'),
                 TextEntry::make('status')->badge()
-                    ->color(fn ($state) => LeadsTable::STATUS_COLORS[$state] ?? 'gray')
-                    ->formatStateUsing(fn ($state) => ucfirst($state)),
-                TextEntry::make('priority')->badge()->formatStateUsing(fn ($state) => ucfirst($state)),
-                TextEntry::make('assignee.name')->label('Assigned to')->placeholder('Unassigned'),
-                TextEntry::make('lead_type')->label('Type')->formatStateUsing(fn ($state) => ucfirst($state)),
-                TextEntry::make('source')->placeholder('-'),
-                TextEntry::make('created_at')->label('Received')->dateTime('d M Y H:i'),
+                    ->color(fn ($state) => Status::LEAD[$state] ?? 'gray')
+                    ->formatStateUsing(fn ($state) => Status::label($state)),
+                TextEntry::make('priority')->badge()
+                    ->color(fn ($state) => Status::PRIORITY[$state] ?? 'gray')
+                    ->formatStateUsing(fn ($state) => Status::label($state)),
+                TextEntry::make('assignee.name')->label('Owner')->placeholder('Unassigned'),
+                TextEntry::make('lead_type')->label('Type')->formatStateUsing(fn ($state) => Status::label($state)),
+                TextEntry::make('source')->placeholder('-')
+                    ->state(fn (Lead $record) => collect([$record->source, $record->source_page, $record->campaign ? "campaign: {$record->campaign}" : null])->filter()->implode(' · ') ?: null),
+                TextEntry::make('submitted_at')->label('Customer submitted')->dateTime('d M Y H:i')->placeholder('-'),
+                TextEntry::make('created_at')->label('Lead created')->dateTime('d M Y H:i'),
+                TextEntry::make('first_response_at')->label('First response')->dateTime('d M Y H:i')->placeholder('Not yet'),
                 TextEntry::make('last_contacted_at')->label('Last contacted')->dateTime('d M Y H:i')->placeholder('Not yet'),
             ]),
+            Section::make('Outcome')->columns(4)
+                ->visible(fn (Lead $record) => in_array($record->status, ['won', 'lost'], true))
+                ->schema([
+                    TextEntry::make('closed_at')->label('Closed')->dateTime('d M Y H:i'),
+                    TextEntry::make('closer.name')->label('Closed by')->placeholder('-'),
+                    TextEntry::make('lost_reason')->label('Lost reason')
+                        ->formatStateUsing(fn ($state) => Lead::LOST_REASONS[$state] ?? $state)
+                        ->visible(fn (Lead $record) => $record->status === 'lost')->placeholder('-'),
+                    TextEntry::make('order.order_number')->label('Order')
+                        ->url(fn (Lead $record) => $record->order ? OrderResource::getUrl('view', ['record' => $record->order]) : null)
+                        ->visible(fn (Lead $record) => $record->status === 'won')->placeholder('-'),
+                    TextEntry::make('outcome_notes')->label('Notes')->placeholder('-')->columnSpanFull()
+                        ->extraAttributes(['class' => 'whitespace-pre-line']),
+                ]),
             Section::make('Customer')->columns(3)->schema([
                 TextEntry::make('customer_name')->label('Name'),
                 TextEntry::make('company_name')->label('Company')->placeholder('-'),
@@ -34,8 +55,15 @@ class LeadInfolist
                 TextEntry::make('location')->label('Location')
                     ->state(fn ($record) => collect([$record->city, $record->state, $record->postal_code, $record->country_code])->filter()->implode(', ') ?: null)
                     ->placeholder('-'),
+                TextEntry::make('customer_leads')->label('Customer history')
+                    ->state(function (Lead $record) {
+                        $others = $record->customer_id ? Lead::query()->where('customer_id', $record->customer_id)->whereKeyNot($record->id)->count() : 0;
+
+                        return $others > 0 ? "{$others} other enquiry(ies) from this customer" : 'First enquiry';
+                    })->columnSpanFull(),
             ]),
-            Section::make('Enquiry')->schema([
+            // The customer's original words, kept apart from internal notes (those live in the timeline).
+            Section::make('Original enquiry')->description('As submitted by the customer. Internal notes are in the activity timeline.')->schema([
                 TextEntry::make('subject')->placeholder('-'),
                 // Rendered as escaped plain text; customer input is never treated as HTML.
                 TextEntry::make('message')->placeholder('No message')->prose(false)->extraAttributes(['class' => 'whitespace-pre-line']),

@@ -16,7 +16,10 @@ class LeadActivity extends Model
     /** @use HasFactory<LeadActivityFactory> */
     use HasFactory;
 
-    public const TYPES = ['note', 'call', 'email', 'meeting', 'status_change', 'assignment'];
+    public const TYPES = ['note', 'call', 'email', 'meeting', 'status_change', 'assignment', 'follow_up', 'quotation', 'outcome', 'order'];
+
+    /** Activities that count as a genuine customer contact for first-response and last-contact. */
+    public const CONTACT_TYPES = ['call', 'email', 'meeting'];
 
     /** @var list<string> */
     protected $fillable = [
