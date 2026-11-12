@@ -140,25 +140,26 @@ class RealCatalogueSeeder extends Seeder
         $rows = json_decode((string) file_get_contents(__DIR__.'/data/unox-products.json'), true, 512, JSON_THROW_ON_ERROR);
 
         foreach ($rows as $index => $row) {
-            if (Product::withTrashed()->where('sku', $row['sku'])->exists()) {
-                continue;
-            }
+            $product = Product::withTrashed()->firstOrNew(['sku' => $row['sku']]);
 
-            $product = new Product([
+            $product->fill([
                 'category_id' => $categoryIds[$row['subCategory'] ?? $row['category']],
                 'brand_id' => $brandIds[$row['brand']],
                 'name' => $row['name'],
                 'slug' => $row['slug'],
-                'sku' => $row['sku'],
                 'short_description' => $row['short'],
                 'description' => $row['description'],
                 'price' => $row['price'],
                 'currency_code' => 'INR',
                 'power_source' => $row['powerSource'],
                 'key_highlights' => $row['highlights'],
+                'warranty_period' => $row['warrantyPeriod'] ?? null,
                 'sort_order' => $index + 1,
             ]);
             $product->publish()->save();
+
+            // Re-sync specifications for this product
+            $product->specifications()->delete();
 
             foreach ($row['specs'] as $i => $spec) {
                 ProductSpecification::create([
@@ -168,7 +169,7 @@ class RealCatalogueSeeder extends Seeder
                     'specification_label' => $spec['label'],
                     'value_type' => ProductSpecification::TYPE_STRING,
                     'value_string' => $spec['value'],
-                    'unit' => $spec['unit'],
+                    'unit' => $spec['unit'] ?? null,
                     'sort_order' => $i + 1,
                 ]);
             }

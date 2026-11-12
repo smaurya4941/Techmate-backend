@@ -328,25 +328,72 @@
   {
     "slug": "unox-xevc-0511-eprm",
     "sku": "XEVC-0511-EPRM",
-    "name": "UNOX XEVC-0511-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven GN 1/1",
+    "name": "Commercial Electric Countertop Combi Oven - GN1/1 UNOX XEVC-0511-EPRM CHEFTOP MIND.Maps",
     "category": "cooking",
     "subCategory": "cooking-combi-ovens",
     "brand": "unox",
     "price": 435000,
-    "short": "Electric countertop combi oven with 5 GN 1/1 trays. Unox, Italy.",
-    "description": "UNOX XEVC-0511-EPRM CHEFTOP MIND.Maps Countertop Plus Combi Oven GN 1/1. Electric countertop combi oven with 5 GN 1/1 trays. Unox, Italy. Supplied and supported in India by Techmate Industries as an authorised UNOX partner.",
+    "warrantyPeriod": "1 Year On-site Manufacturer Warranty",
+    "short": "Technologically advanced 5-tray GN 1/1 commercial electric countertop combi oven with 9.5\" touch control, CHEFUNOX automation, and 9.3 kW power.",
+    "description": "Commercial Electric Countertop Combi Oven - GN1/1 UNOX XEVC-0511-EPRM CHEFTOP MIND.Maps PLUS. Technologically advanced combi oven for gastronomy cooking processes (dehydrating, steaming, low temperature cooking, sous vide cooking, roasting, grilling, pan frying, regeneration and plate regeneration) and for fresh or frozen baking thanks to Unox Intensive Cooking and Intelligence Performance technologies which guarantee perfect results and repeatability for any load size. Features automatic management of cooking processes (CHEFUNOX) for perfect results even without trained staff. Equipped with a 9.5\" capacitive touch screen, left-hinged door, and robust AISI 304 food-grade stainless steel construction. Techmate Industries is an authorised dealer for all UNOX ovens in Delhi NCR and across India, delivering complete equipment supply, kitchen layout consultation, factory-trained commissioning, genuine spare parts, and comprehensive 1-year on-site warranty support.",
     "powerSource": "Electric",
     "highlights": [
-      "5 trays (GN 1/1)",
-      "9.3 kW",
-      "400 V 3N"
+      "5 Trays Capacity (GN 1/1, 530 × 325 mm)",
+      "9.5\" Capacitive Touch Control with MIND.Maps™ Visual Programming",
+      "9.3 kW Connected Power (380-415V 3N~ / 400V 3N~)",
+      "Intelligent Cooking Automation (CHEFUNOX, Intensive Cooking & Intelligence Performance)",
+      "Multi-Cooking Modes: Steam, Bake, Combi, Convection, Roast, Grill, Pan Fry, Sous-Vide & Regeneration",
+      "Food-Grade AISI 304 Stainless Steel Construction (70 kg Net Weight)",
+      "Authorised UNOX Italy Dealership — Techmate Delhi NCR & Pan-India Dispatch"
     ],
     "specs": [
       {
         "group": "Capacity & Output",
-        "label": "Capacity",
-        "value": "5 x GN 1/1",
-        "unit": "Trays"
+        "label": "Tray Capacity",
+        "value": "5 Trays",
+        "unit": null
+      },
+      {
+        "group": "Capacity & Output",
+        "label": "Pan Capacity",
+        "value": "5 Trays (GN 1/1)",
+        "unit": null
+      },
+      {
+        "group": "Capacity & Output",
+        "label": "Number of Trays",
+        "value": "5 Trays",
+        "unit": null
+      },
+      {
+        "group": "Capacity & Output",
+        "label": "Tray Size",
+        "value": "GN 1/1 (530 × 325 mm)",
+        "unit": null
+      },
+      {
+        "group": "Capacity & Output",
+        "label": "Pitch",
+        "value": "67 mm",
+        "unit": null
+      },
+      {
+        "group": "Capacity & Output",
+        "label": "Capacity / Throughput",
+        "value": "800 kg",
+        "unit": null
+      },
+      {
+        "group": "Capacity & Output",
+        "label": "Minimum Order Quantity",
+        "value": "1 Piece",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Power Source",
+        "value": "Electric",
+        "unit": null
       },
       {
         "group": "Electrical & Thermal",
@@ -357,14 +404,86 @@
       {
         "group": "Electrical & Thermal",
         "label": "Supply Voltage",
-        "value": "400 V 3N",
+        "value": "380-415V 3N~ / 220-240V 3~ / 220-240V 1~ (400V 3N~)",
+        "unit": null
+      },
+      {
+        "group": "Electrical & Thermal",
+        "label": "Max Temperature",
+        "value": "260°C",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Size / Dimension",
+        "value": "Medium Countertop",
+        "unit": null
+      },
+      {
+        "group": "Dimensions & Weight",
+        "label": "Dimensions (W × D × H)",
+        "value": "750 × 783 × 675 mm",
         "unit": null
       },
       {
         "group": "Dimensions & Weight",
         "label": "Net Weight",
-        "value": "70",
-        "unit": "kg"
+        "value": "70 kg",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Model Name / Number",
+        "value": "XEVC-0511-EPRM",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Brand & Origin",
+        "value": "UNOX (Italy)",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Series",
+        "value": "CHEFTOP MIND.Maps™ PLUS / Bakertop Mind Maps Compatibility",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Body Material",
+        "value": "AISI 304 Stainless Steel",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Door Type",
+        "value": "Single Door (Left-Hinged, Triple-Glazed)",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Control Type",
+        "value": "Digital 9.5\" Capacitive Touch Screen",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Functions",
+        "value": "Steam, Bake, Combi, Convection, Regeneration, Roast, Grill, Sous-Vide",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Warranty",
+        "value": "1 Year On-site Manufacturer Warranty",
+        "unit": null
+      },
+      {
+        "group": "Construction & Material",
+        "label": "Applications",
+        "value": "Cloud Kitchen, Restaurant, Bakery, Canteen, Cafe, Hotel",
+        "unit": null
       }
     ]
   },
